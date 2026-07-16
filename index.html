@@ -11,7 +11,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <title>HandoverX</title>
   <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body>
   <header class="topbar">
@@ -73,7 +73,7 @@
           <p class="eyebrow">STEP 1 OF 4</p><h1>Property details</h1><p class="panel-intro">Start with the essentials. You can create multiple reports for the same address.</p>
           <div class="form-card">
             <label class="full"><span>Property address *</span><textarea id="address" rows="3" placeholder="Block, street, unit number, postal code"></textarea></label>
-            <label><span>Handover date</span><input id="handoverDate" type="date" /></label>
+            <label><span>Handover date</span><input id="handoverDate" type="text" inputmode="numeric" maxlength="8" placeholder="DDMMYYYY" autocomplete="off" /><small id="handoverDateDisplay" class="date-preview">Enter as DDMMYYYY</small></label>
             <label><span>Prepared for</span><input id="preparedFor" placeholder="Tenant or landlord name" /></label>
             <label><span>Prepared by</span><input id="preparedBy" placeholder="Your name" /></label>
             <label class="full"><span>General notes</span><textarea id="generalNotes" rows="4" placeholder="Access limitations, cleaning in progress, utilities unavailable, or other context"></textarea></label>
@@ -127,6 +127,6 @@
 
   <div id="toast" class="toast" role="status"></div>
   <script src="vendor/pdf-lib.min.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

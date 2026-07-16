@@ -1,5 +1,5 @@
-const CACHE = "handoverx-v3";
-const ASSETS = ["./", "./index.html", "./styles.css?v=3", "./app.js", "./manifest.json", "./og.png", "./vendor/pdf-lib.min.js"];
+const CACHE = "handoverx-v4";
+const ASSETS = ["./", "./index.html", "./styles.css?v=4", "./app.js?v=4", "./manifest.json", "./og.png", "./vendor/pdf-lib.min.js"];
 self.addEventListener("install", event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", event => event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request))));
