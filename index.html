@@ -11,7 +11,24 @@
   <meta name="twitter:card" content="summary_large_image" />
   <title>HandoverX</title>
   <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <script>
+    (() => {
+      const build = "5";
+      const key = "handoverx-build";
+      if (localStorage.getItem(key) === build) return;
+      const unregister = "serviceWorker" in navigator
+        ? navigator.serviceWorker.getRegistrations().then(items => Promise.all(items.map(item => item.unregister())))
+        : Promise.resolve();
+      const clearCaches = "caches" in window
+        ? caches.keys().then(keys => Promise.all(keys.map(name => caches.delete(name))))
+        : Promise.resolve();
+      Promise.all([unregister, clearCaches]).finally(() => {
+        localStorage.setItem(key, build);
+        if (!location.search.includes("fresh=5")) location.replace("./?fresh=5");
+      });
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
   <header class="topbar">
@@ -127,6 +144,6 @@
 
   <div id="toast" class="toast" role="status"></div>
   <script src="vendor/pdf-lib.min.js"></script>
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
