@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12352f" />
+  <meta name="description" content="Local-first residential condition reports for Singapore property handovers." />
+  <meta property="og:title" content="HandoverX" />
+  <meta property="og:description" content="Clear evidence. Calm handovers." />
+  <meta property="og:image" content="og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>HandoverX</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <button class="brand" data-view="home" aria-label="HandoverX home"><span class="brand-mark">HX</span><span>HandoverX</span></button>
+    <div class="top-actions">
+      <span id="saveStatus" class="save-status">Saved on this device</span>
+      <button id="newReportTop" class="button primary">+ New report</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="homeView" class="view page-shell">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">RESIDENTIAL CONDITION RECORDS</p>
+          <h1>Clear evidence.<br />Calm handovers.</h1>
+          <p class="hero-copy">Document every room, comment and photo in one professional condition report. Your information stays on this device.</p>
+          <div class="hero-actions">
+            <button id="newReportHero" class="button primary large">Create a report</button>
+            <button id="importButton" class="button secondary large">Restore backup</button>
+            <input id="importInput" type="file" accept="application/json,.handoverx" hidden />
+          </div>
+        </div>
+        <div class="privacy-card">
+          <div class="privacy-icon">✓</div>
+          <p class="eyebrow">PRIVATE BY DESIGN</p>
+          <h2>Photos never leave your device</h2>
+          <p>Reports are saved inside this browser. Export a backup regularly so you can recover them later.</p>
+          <button id="backupAll" class="text-button">Download all-data backup →</button>
+        </div>
+      </div>
+
+      <div class="section-heading">
+        <div><p class="eyebrow">YOUR WORKSPACE</p><h2>Saved reports</h2></div>
+        <label class="search-wrap"><span>⌕</span><input id="searchReports" type="search" placeholder="Search address or report" /></label>
+      </div>
+      <div id="reportList" class="report-grid"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        <div class="empty-icon">⌂</div><h3>No reports yet</h3><p>Create your first property condition report. It will be saved automatically on this device.</p>
+        <button class="button primary" id="emptyCreate">Create first report</button>
+      </div>
+    </section>
+
+    <section id="editorView" class="view editor-shell" hidden>
+      <aside class="editor-sidebar">
+        <button class="back-button" id="backHome">← All reports</button>
+        <div class="step-list">
+          <button class="step active" data-step="details"><span>1</span><div><strong>Property details</strong><small>Address & parties</small></div></button>
+          <button class="step" data-step="checklist"><span>2</span><div><strong>Room checklist</strong><small>Condition overview</small></div></button>
+          <button class="step" data-step="observations"><span>3</span><div><strong>Observations</strong><small>Comments & photos</small></div></button>
+          <button class="step" data-step="review"><span>4</span><div><strong>Review & export</strong><small>Create PDF</small></div></button>
+        </div>
+        <div class="local-note"><strong>Stored locally</strong><span>This report and its photos remain in this browser.</span></div>
+      </aside>
+
+      <div class="editor-main">
+        <div class="mobile-editor-nav"><button id="mobileBack">←</button><strong id="mobileStepTitle">Property details</strong><span id="mobileStepCount">1 of 4</span></div>
+        <section class="editor-panel" id="detailsPanel">
+          <p class="eyebrow">STEP 1 OF 4</p><h1>Property details</h1><p class="panel-intro">Start with the essentials. You can create multiple reports for the same address.</p>
+          <div class="form-card">
+            <label class="full"><span>Report title</span><input id="reportTitle" placeholder="e.g. Initial Condition Report" /></label>
+            <label class="full"><span>Property address *</span><textarea id="address" rows="3" placeholder="Block, street, unit number, postal code"></textarea></label>
+            <label><span>Report date</span><input id="reportDate" type="date" /></label>
+            <label><span>Report type</span><select id="reportType"><option>Initial condition</option><option>Follow-up</option><option>Handback condition</option><option>Other</option></select></label>
+            <label><span>Prepared for</span><input id="preparedFor" placeholder="Tenant or landlord name" /></label>
+            <label><span>Prepared by</span><input id="preparedBy" placeholder="Your name" /></label>
+            <label class="full"><span>General notes</span><textarea id="generalNotes" rows="4" placeholder="Access limitations, cleaning in progress, utilities unavailable, or other context"></textarea></label>
+          </div>
+          <div class="panel-footer"><span></span><button class="button primary" data-next="checklist">Continue to checklist →</button></div>
+        </section>
+
+        <section class="editor-panel" id="checklistPanel" hidden>
+          <p class="eyebrow">STEP 2 OF 4</p><h1>Room checklist</h1><p class="panel-intro">Add a quick condition summary for each area. Leave anything irrelevant blank.</p>
+          <div id="checklistRooms" class="checklist-rooms"></div>
+          <button id="addCustomRoom" class="button secondary">+ Add another room</button>
+          <div class="panel-footer"><button class="button ghost" data-prev="details">← Back</button><button class="button primary" data-next="observations">Continue to observations →</button></div>
+        </section>
+
+        <section class="editor-panel" id="observationsPanel" hidden>
+          <div class="heading-actions"><div><p class="eyebrow">STEP 3 OF 4</p><h1>Observations</h1><p class="panel-intro">Each observation can include a comment and up to three photos.</p></div><button id="addObservation" class="button primary">+ Add observation</button></div>
+          <div id="observationList" class="observation-list"></div>
+          <div id="observationEmpty" class="empty-state compact"><div class="empty-icon">◎</div><h3>No observations added</h3><p>Add the first condition, defect or item you want recorded.</p><button id="emptyAddObservation" class="button primary">Add observation</button></div>
+          <div class="panel-footer"><button class="button ghost" data-prev="checklist">← Back</button><button class="button primary" data-next="review">Review report →</button></div>
+        </section>
+
+        <section class="editor-panel" id="reviewPanel" hidden>
+          <p class="eyebrow">STEP 4 OF 4</p><h1>Review & export</h1><p class="panel-intro">Check the summary, then create a professional PDF snapshot.</p>
+          <div id="reviewSummary" class="review-summary"></div>
+          <div class="export-card"><div><p class="eyebrow">READY TO SHARE</p><h2>Generate condition report</h2><p>The PDF includes a unique report ID, version, generation timestamp and document fingerprint.</p></div><button id="generatePdf" class="button primary large">Download PDF</button></div>
+          <div class="review-actions"><button id="backupReport" class="button secondary">Download report backup</button><button id="duplicateReport" class="button secondary">Duplicate as new report</button></div>
+          <div class="panel-footer"><button class="button ghost" data-prev="observations">← Back</button><button class="button primary" id="finishReport">Done</button></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="observationDialog" class="modal">
+    <form method="dialog" id="observationForm">
+      <div class="modal-head"><div><p class="eyebrow">CONDITION RECORD</p><h2 id="observationDialogTitle">Add observation</h2></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div>
+      <div class="modal-body">
+        <label><span>Room / area *</span><select id="observationRoom"></select></label>
+        <label id="otherRoomWrap" hidden><span>Other room name</span><input id="otherRoom" placeholder="Enter area name" /></label>
+        <label><span>Comment *</span><textarea id="observationComment" rows="4" placeholder="Describe the existing condition or defect clearly"></textarea></label>
+        <div class="photo-field"><div><strong>Photos</strong><span>Up to 3 photos. Large images are compressed automatically.</span></div><label class="upload-box"><input id="photoInput" type="file" accept="image/*" multiple hidden /><span class="upload-icon">＋</span><strong>Select photos</strong><small>JPG, PNG or phone image</small></label><div id="photoPreview" class="photo-preview"></div></div>
+      </div>
+      <div class="modal-footer"><button value="cancel" class="button ghost">Cancel</button><button id="saveObservation" value="default" class="button primary">Save observation</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="annotationDialog" class="modal annotation-modal">
+    <div class="modal-head"><div><p class="eyebrow">PHOTO MARKUP</p><h2>Point out the exact location</h2></div><button id="closeAnnotation" class="icon-button">×</button></div>
+    <div class="annotation-tools"><button data-tool="circle" class="tool active">Circle</button><button data-tool="arrow" class="tool">Arrow</button><button data-tool="draw" class="tool">Draw</button><button id="undoAnnotation" class="tool">Undo</button><button id="clearAnnotation" class="tool">Clear</button><label>Colour <input id="annotationColor" type="color" value="#e33b36" /></label></div>
+    <div class="canvas-wrap"><canvas id="annotationCanvas"></canvas></div>
+    <div class="modal-footer"><button id="cancelAnnotation" class="button ghost">Cancel</button><button id="saveAnnotation" class="button primary">Save marked photo</button></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="vendor/pdf-lib.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

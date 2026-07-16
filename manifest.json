@@ -1,0 +1,10 @@
+{
+  "name": "HandoverX Property Condition Reports",
+  "short_name": "HandoverX",
+  "description": "Local-first residential condition reporting for Singapore property handovers.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f2eb",
+  "theme_color": "#12352f",
+  "icons": []
+}
