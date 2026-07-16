@@ -72,13 +72,12 @@
         <section class="editor-panel" id="detailsPanel">
           <p class="eyebrow">STEP 1 OF 4</p><h1>Property details</h1><p class="panel-intro">Start with the essentials. You can create multiple reports for the same address.</p>
           <div class="form-card">
-            <label class="full"><span>Report title</span><input id="reportTitle" placeholder="e.g. Initial Condition Report" /></label>
             <label class="full"><span>Property address *</span><textarea id="address" rows="3" placeholder="Block, street, unit number, postal code"></textarea></label>
-            <label><span>Report date</span><input id="reportDate" type="date" /></label>
-            <label><span>Report type</span><select id="reportType"><option>Initial condition</option><option>Follow-up</option><option>Handback condition</option><option>Other</option></select></label>
+            <label><span>Handover date</span><input id="handoverDate" type="date" /></label>
             <label><span>Prepared for</span><input id="preparedFor" placeholder="Tenant or landlord name" /></label>
             <label><span>Prepared by</span><input id="preparedBy" placeholder="Your name" /></label>
             <label class="full"><span>General notes</span><textarea id="generalNotes" rows="4" placeholder="Access limitations, cleaning in progress, utilities unavailable, or other context"></textarea></label>
+            <fieldset class="full room-selector"><legend>Rooms included in this report *</legend><p>Choose the areas in this property. Only these rooms will appear in the checklist and observation list.</p><div id="roomSelector" class="room-selector-grid"></div><div class="custom-room-row"><input id="customRoomName" placeholder="Enter another room name" /><button type="button" id="addRoomSelection" class="button secondary">+ Add room</button></div></fieldset>
           </div>
           <div class="panel-footer"><span></span><button class="button primary" data-next="checklist">Continue to checklist →</button></div>
         </section>
@@ -86,7 +85,6 @@
         <section class="editor-panel" id="checklistPanel" hidden>
           <p class="eyebrow">STEP 2 OF 4</p><h1>Room checklist</h1><p class="panel-intro">Add a quick condition summary for each area. Leave anything irrelevant blank.</p>
           <div id="checklistRooms" class="checklist-rooms"></div>
-          <button id="addCustomRoom" class="button secondary">+ Add another room</button>
           <div class="panel-footer"><button class="button ghost" data-prev="details">← Back</button><button class="button primary" data-next="observations">Continue to observations →</button></div>
         </section>
 
@@ -100,7 +98,7 @@
         <section class="editor-panel" id="reviewPanel" hidden>
           <p class="eyebrow">STEP 4 OF 4</p><h1>Review & export</h1><p class="panel-intro">Check the summary, then create a professional PDF snapshot.</p>
           <div id="reviewSummary" class="review-summary"></div>
-          <div class="export-card"><div><p class="eyebrow">READY TO SHARE</p><h2>Generate condition report</h2><p>The PDF includes a unique report ID, version, generation timestamp and document fingerprint.</p></div><button id="generatePdf" class="button primary large">Download PDF</button></div>
+          <div class="export-card"><div><p class="eyebrow">READY TO SHARE</p><h2>Generate condition report</h2><p>Create a clean PDF containing the property information, selected-room checklist and photo observations.</p></div><button id="generatePdf" class="button primary large">Download PDF</button></div>
           <div class="review-actions"><button id="backupReport" class="button secondary">Download report backup</button><button id="duplicateReport" class="button secondary">Duplicate as new report</button></div>
           <div class="panel-footer"><button class="button ghost" data-prev="observations">← Back</button><button class="button primary" id="finishReport">Done</button></div>
         </section>
@@ -113,7 +111,6 @@
       <div class="modal-head"><div><p class="eyebrow">CONDITION RECORD</p><h2 id="observationDialogTitle">Add observation</h2></div><button class="icon-button" value="cancel" aria-label="Close">×</button></div>
       <div class="modal-body">
         <label><span>Room / area *</span><select id="observationRoom"></select></label>
-        <label id="otherRoomWrap" hidden><span>Other room name</span><input id="otherRoom" placeholder="Enter area name" /></label>
         <label><span>Comment *</span><textarea id="observationComment" rows="4" placeholder="Describe the existing condition or defect clearly"></textarea></label>
         <div class="photo-field"><div><strong>Photos</strong><span>Up to 3 photos. Large images are compressed automatically.</span></div><label class="upload-box"><input id="photoInput" type="file" accept="image/*" multiple hidden /><span class="upload-icon">＋</span><strong>Select photos</strong><small>JPG, PNG or phone image</small></label><div id="photoPreview" class="photo-preview"></div></div>
       </div>
