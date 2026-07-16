@@ -13,7 +13,7 @@
   <link rel="manifest" href="manifest.json" />
   <script>
     (() => {
-      const build = "6";
+      const build = "8";
       const key = "handoverx-build";
       if (localStorage.getItem(key) === build) return;
       const unregister = "serviceWorker" in navigator
@@ -24,11 +24,11 @@
         : Promise.resolve();
       Promise.all([unregister, clearCaches]).finally(() => {
         localStorage.setItem(key, build);
-        if (!location.search.includes("fresh=6")) location.replace("./?fresh=6");
+        if (!location.search.includes("fresh=8")) location.replace("./?fresh=8");
       });
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=6" />
+  <link rel="stylesheet" href="styles.css?v=8" />
 </head>
 <body>
   <header class="topbar">
@@ -106,7 +106,7 @@
         </section>
 
         <section class="editor-panel" id="observationsPanel" hidden>
-          <div class="heading-actions"><div><p class="eyebrow">STEP 3 OF 4</p><h1>Observations</h1><p class="panel-intro">Each observation can include a comment and up to three photos.</p></div><button id="addObservation" class="button primary">+ Add observation</button></div>
+          <div class="heading-actions"><div><p class="eyebrow">STEP 3 OF 4</p><h1>Observations</h1><p class="panel-intro">Each observation can include a comment and up to two photos.</p></div><button id="addObservation" class="button primary">+ Add observation</button></div>
           <div id="observationList" class="observation-list"></div>
           <div id="observationEmpty" class="empty-state compact"><div class="empty-icon">◎</div><h3>No observations added</h3><p>Add the first condition, defect or item you want recorded.</p><button id="emptyAddObservation" class="button primary">Add observation</button></div>
           <div class="panel-footer"><button class="button ghost" data-prev="checklist">← Back</button><button class="button primary" data-next="review">Review report →</button></div>
@@ -115,7 +115,7 @@
         <section class="editor-panel" id="reviewPanel" hidden>
           <p class="eyebrow">STEP 4 OF 4</p><h1>Review & export</h1><p class="panel-intro">Check the summary, then create a professional PDF snapshot.</p>
           <div id="reviewSummary" class="review-summary"></div>
-          <div class="export-card"><div><p class="eyebrow">READY TO SHARE</p><h2>Generate condition report</h2><p>Create a clean PDF containing the property information, selected-room checklist and photo observations.</p></div><button id="generatePdf" class="button primary large">Download PDF</button></div>
+          <div class="export-card"><div><p class="eyebrow">READY TO SHARE</p><h2>Generate condition report</h2><p>Create a clean PDF containing the property information, selected-room checklist and photo observations.</p><label class="pdf-option"><input id="includeDisclaimer" type="checkbox" /><span><strong>Include optional disclaimer page</strong><small>Adds an evidence-use notice and HandoverX call to action at the end.</small></span></label></div><button id="generatePdf" class="button primary large">Download PDF</button></div>
           <div class="review-actions"><button id="backupReport" class="button secondary">Download report backup</button><button id="duplicateReport" class="button secondary">Duplicate as new report</button></div>
           <div class="panel-footer"><button class="button ghost" data-prev="observations">← Back</button><button class="button primary" id="finishReport">Done</button></div>
         </section>
@@ -129,7 +129,7 @@
       <div class="modal-body">
         <label><span>Room / area *</span><select id="observationRoom"></select></label>
         <label><span>Comment *</span><textarea id="observationComment" rows="4" placeholder="Describe the existing condition or defect clearly"></textarea></label>
-        <div class="photo-field"><div><strong>Photos</strong><span>Up to 3 photos. Large images are compressed automatically.</span></div><label class="upload-box"><input id="photoInput" type="file" accept="image/*" multiple hidden /><span class="upload-icon">＋</span><strong>Select photos</strong><small>JPG, PNG or phone image</small></label><div id="photoPreview" class="photo-preview"></div></div>
+        <div class="photo-field"><div><strong>Photos</strong><span>Up to 2 photos. Large images are compressed automatically.</span></div><label class="upload-box"><input id="photoInput" type="file" accept="image/*" multiple hidden /><span class="upload-icon">＋</span><strong>Select photos</strong><small>JPG, PNG or phone image</small></label><div id="photoPreview" class="photo-preview"></div></div>
       </div>
       <div class="modal-footer"><button value="cancel" class="button ghost">Cancel</button><button id="saveObservation" value="default" class="button primary">Save observation</button></div>
     </form>
@@ -144,6 +144,6 @@
 
   <div id="toast" class="toast" role="status"></div>
   <script src="vendor/pdf-lib.min.js"></script>
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
