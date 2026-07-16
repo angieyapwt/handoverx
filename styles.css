@@ -26,9 +26,8 @@
 .photo-preview{grid-template-columns:repeat(2,1fr)}
 @media(max-width:620px){.form-card>label:not(.full){grid-template-rows:auto auto auto}.pdf-option{margin-top:16px}.export-card .pdf-option input{width:18px}.photo-preview{grid-template-columns:1fr 1fr}}
 
-/* Build 9: room-level remarks */
-.room-remarks{display:grid;grid-template-columns:minmax(135px,.7fr) minmax(500px,2.45fr);gap:10px;align-items:start;border-top:1px solid var(--line);padding-top:15px;margin-top:5px}
-.room-remarks>span{font-size:13px;font-weight:700;padding-top:11px}.room-remarks textarea{min-height:76px}
-@media(max-width:820px){.room-remarks{grid-template-columns:minmax(120px,.65fr) minmax(445px,2.35fr)}}
-@media(max-width:620px){.room-remarks{grid-template-columns:1fr}.room-remarks>span{padding-top:0}}
+/* Build 11: one overall Room Checklist remark */
+.checklist-remarks{display:grid;gap:8px;background:#edf5f1;border:1px solid #b9d2c8;border-radius:15px;padding:18px 20px;margin-bottom:3px}
+.checklist-remarks>span{font-size:13px;font-weight:700;color:var(--green)}
+.checklist-remarks textarea{min-height:92px;background:#fff}
 .date-preview{color:var(--green);font-size:11px;margin-top:-2px}.date-preview.invalid{color:#a23e32}
