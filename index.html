@@ -13,7 +13,7 @@
   <link rel="manifest" href="manifest.json" />
   <script>
     (() => {
-      const build = "8";
+      const build = "10";
       const key = "handoverx-build";
       if (localStorage.getItem(key) === build) return;
       const unregister = "serviceWorker" in navigator
@@ -24,11 +24,11 @@
         : Promise.resolve();
       Promise.all([unregister, clearCaches]).finally(() => {
         localStorage.setItem(key, build);
-        if (!location.search.includes("fresh=8")) location.replace("./?fresh=8");
+        if (!location.search.includes("fresh=10")) location.replace("./?fresh=10");
       });
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=10" />
 </head>
 <body>
   <header class="topbar">
@@ -144,6 +144,6 @@
 
   <div id="toast" class="toast" role="status"></div>
   <script src="vendor/pdf-lib.min.js"></script>
-  <script src="app.js?v=8"></script>
+  <script src="app.js?v=10"></script>
 </body>
 </html>
